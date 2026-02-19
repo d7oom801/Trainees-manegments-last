@@ -32,11 +32,9 @@ class TraineeAdmin(admin.ModelAdmin):
     change_list_template = "admin/trainees_changelist.html"
 
     def custom_button(self, obj):
-        # إذا كان منتهي، لا تظهر الزر
+
         #if str(obj.status) == 'منتهي' or str(obj.status) == 'Finished':
          #   return format_html('<span style="color:gray">منتهي</span>')
-
-        # هنا نستخدم obj.id (الرقم 90)
         return format_html(
             '''
             <a href="/end-training/{}/" style="

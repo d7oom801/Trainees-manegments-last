@@ -123,7 +123,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Custom User Model
 AUTH_USER_MODEL = 'trainees.User'
-SIMPLEUI_HOME_INFO = False  # يخفي معلومات السيرفر من الرئيسية
-SIMPLEUI_ANALYSIS = False   # يوقف تتبع الاستخدام (أسرع)
-SIMPLEUI_DEFAULT_THEME = 'admin.dark-blue.css' # الثيم الافتراضي (أزرق جميل)
+SIMPLEUI_HOME_INFO = False
+SIMPLEUI_ANALYSIS = False
+SIMPLEUI_DEFAULT_THEME = 'admin.dark-blue.css'
 
