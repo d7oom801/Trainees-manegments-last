@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>خطاب إنهاء تدريب</title>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+
+  <style>
+    .actions-bar {
+        width: 210mm;
+        margin: 20px auto;
+        background: #333;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Tahoma, Arial, sans-serif;
+    }
+    .btn {
+        padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;
+        font-weight: bold; font-family: Tahoma; text-decoration: none; font-size: 14px;
+    }
+    .btn-print { background: #007bff; color: white; }
+    .btn-confirm { background: #dc3545; color: white; margin-right: 10px; }
+    .btn-cancel { background: #6c757d; color: white; margin-right: 10px; }
+
+    @media print {
+        .actions-bar { display: none !important; }
+        body { background: #fff; margin: 0; padding: 0; }
+        .page {
+            margin: 0;
+            padding: 10mm 15mm; /* تصغير الهوامش وقت الطباعة شوي عشان يكفي */
+            box-shadow: none;
+            min-height: auto; /* هذا السطر يمنع الصفحة تطول وتفتح ورقة ثانية */
+            height: auto;
+            page-break-after: avoid;
+        }
+        @page { size: A4; margin: 0; } /* يشيل هوامش المتصفح الافتراضية */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="actions-bar">
+      <div><strong>المتدرب: {{ trainee.name }}</strong></div>
+      <div style="display: flex; align-items: center;">
+          <button onclick="window.print()" class="btn btn-print">🖨️ طباعة الخطاب</button>
+
+          <form method="POST" style="margin: 0;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-confirm" onclick="return confirm('هل أنت متأكد من اعتماد إنهاء التدريب؟')">✅ اعتماد وإنهاء</button>
+          </form>
+
+          <a href="/admin/trainees/trainee/" class="btn btn-cancel">إلغاء</a>
+      </div>
+  </div>
+
+  <div class="page">
+    <header class="header">
+      <div class="col right">
+        <div class="small title-head">المملكة العربية السعودية</div>
+        <div class="small title-head">وزارة الدفاع</div>
+        <div class="small">وكالة الوزارة لخدمات التميز</div>
+        <div class="small">الإدارة العامة للخدمات الصحية</div>
+       <div class="small header-align-fix">مستشفى الملك سلمان للقوات المسلحة</div>
+        <div class="small">إدارة {{trainee.department.name_ar}}</div>
+      </div>
+
+      <div class="col center">
+        <div class="logo-box">
+        <img src="{% static 'img/LOGO.png' %}" alt="logo" class="logo-img">
+         </div>
+      </div>
+
+
+        <div class="col left">
+<div class="meta">
+  <div class="meta-row">
+    <span class="meta-label">الرقم :</span>
+    <span class="meta-value">0000</span>
+  </div>
+
+  <div class="meta-row">
+    <span class="meta-label">التاريخ :</span>
+    <span class="meta-value">{{date | date:'d/m/y'}}</span>
+  </div>
+
+  <div class="meta-row">
+    <span class="meta-label">المرفقات :</span>
+    <span class="meta-value">—</span>
+  </div>
+
+  <div class="meta-row">
+    <span class="meta-label">الموضوع :</span>
+    <span class="meta-value">بشأن إنهاء تدريب</span>
+  </div>
+</div>
+
+    </div>
+
+
+    </header>
+
+<br>
+<br>
+    <div class="divider"></div>
+
+    <section class="info">
+      <div class="info-row">
+        <div class="cell">
+          <div class="label">الاسم</div>
+          <div class="value">{{trainee.name}}</div>
+        </div>
+        <div class="cell">
+          <div class="label">الرقم التدريب</div>
+          <div class="value">{{trainee.trainee_id}}</div>
+        </div>
+        <div class="cell">
+          <div class="label">تاريخ بداية التدريب</div>
+          <div class="value">{{trainee.start_date|date:'d/m/y'}}</div>
+        </div>
+        <div class="cell">
+          <div class="label">تاريخ نهاية التدريب</div>
+          <div class="value">{{trainee.end_date | date:'d/m/y'}}</div>
+        </div>
+      </div>
+    </section>
+
+    <h1 class="title">
+     مساعد مدير المستشفى للشوؤن الاكاديمية بمستشفى الملك سلمان للقوات المسلحة بالشمالية الغربية
+    </h1>
+<br>
+
+
+    <main class="content">
+
+      <p>
+        السلام عليكم ورحمة الله وبركاته
+        <br>
+        إشارة إلى انتهاء تدريب الموضحة هويتهم أعلاه لدينا بإدارة   {{trainee.department.name_ar}}
+         نفيدكم بأن المتدرب/ة أتم مدة التدريب حسب التواريخ المرفقة.
+          نأمل بعد الاطلاع إكمال اللازم، والسلام عليكم
+
+      </p>
+
+    </main>
+
+    <footer class="footer">
+      <div class="sig-area">
+        <br>
+        <br>
+          <div class="sig-role">{{trainee.department.title}}</div>
+        <div class="signature-line"></div>
+
+
+        <div class="sig-role">{{trainee.department.department_manager}}</div>
+
+        <div class="sig-role">  مدير ادارة {{trainee.department.name_ar}}   </div>
+        <div class="sig-place">بمستشفى الملك سلمان للقوات المسلحة</div>
+        <div class="sig-place">بالشمالية الغربية</div>
+      </div>
+    </footer>
+
+    <br>
+    <br>
+<div class="copy-list">
+  <div class="copy-title">نسخة إلى :</div>
+  <ul>
+    <li>قسم الاشراف والمتابعة / لتعطيل البصمة</li>
+    <li>مسؤول المتدربين</li>
+    <li>مكتبنا</li>
+  </ul>
+</div>
+
+ </div>
+
+</body>
+</html>

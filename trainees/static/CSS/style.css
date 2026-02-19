@@ -1,0 +1,155 @@
+:root{
+  --ink:#111;
+  --muted:#555;
+  --border:#333;
+  --fs-xs:11px; --fs-sm:12px; --fs-md:13px; --fs-14:14px;
+  --fs-base:15px; --fs-xl:16px; --fs-lg:17px;
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#e9e9e9;
+    font-family:"Tahoma","Arial",sans-serif;
+    color:var(--ink)}
+
+.page{
+    position:relative;
+    width:210mm;
+    min-height:297mm;
+    margin:24px auto;
+    background:#fff;
+    padding:18mm 16mm;
+    box-shadow:0 10px 30px rgba(0,0,0,.15)}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px
+}
+.header .col{
+      flex:1;
+}
+
+.header .right{
+    text-align:center
+}
+.header .left{
+    text-align:left;
+    direction:rtl}
+
+.header .center{
+    display:flex;
+    justify-content:center;
+    align-items:center}
+
+.header-align-fix{
+    position:relative;
+    right:-8px
+}
+
+.small{
+    font-size:14px;
+    line-height:1.35;
+    white-space:nowrap
+}
+
+.logo-box{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    background:transparent
+
+}
+
+.logo-img{
+    width:150px;
+    height:150px;
+    object-fit:contain
+}
+
+.muted{
+    color:var(--muted)
+}
+.logo-title{
+    font-weight:700;
+    font-size:var(--fs-xl)
+}
+.logo-sub{
+    font-size:var(--fs-xs);
+    letter-spacing:.6px;
+    color:var(--muted)
+}
+.divider{
+    height:1px;
+    background:#999;
+    margin:12px 0 10px
+}
+
+.info-row{
+    display:flex;
+    border:1px solid var(--border)
+}
+.cell{
+    flex:1;
+    border-left:1px solid var(--border);
+    padding:8px 10px;
+    min-height:58px
+}
+.cell:last-child{
+    border-left:none
+}
+.label{
+    font-size:var(--fs-sm);
+    color:var(--muted);
+    margin-bottom:6px
+}
+.value{
+    font-size:var(--fs-md);
+    font-weight:700
+}
+
+.title{
+    margin:22px 0 12px;
+    font-weight:800;
+    text-align:center;
+    line-height:2.1;
+    font-size:13px;
+}
+
+.content{
+    margin:0;
+    font-size:var(--fs-lg);
+    line-height:2.05
+}
+#greeting{font-weight:800}
+.closing{margin-top:16px}
+
+.footer{margin-top:36px;display:flex;justify-content:flex-end}
+.sig-area{width:280px;text-align:center}
+
+.signature-line{
+    height:40px;
+    border-bottom:2px solid #1b2a57;
+    margin:0 auto 8px;
+    width:240px
+}
+
+.sig-name{
+    font-weight:800;
+    margin-top:6px
+}
+
+.sig-role,.sig-place{
+    font-size:15px;
+    color:var(--ink);
+    margin-top:2px
+}
+
+.meta{direction:rtl;font-size:var(--fs-14)}
+.meta-row{display:flex;gap:6px;margin-bottom:4px}
+.meta-label{width:80px;font-weight:600}
+.meta-value{flex:1}
